@@ -508,7 +508,8 @@ namespace TwitchLib
         }
 
         /// <summary>
-        /// Retrieves an ascending or descending list of followers from a specific channel.
+        /// Retrieves an ascending or descending list of 
+        from a specific channel.
         /// </summary>
         /// <param name="channel">The channel to retrieve the followers from.</param>
         /// <param name="limit">Maximum number of objects in array. Default is 25. Maximum is 100.</param>
@@ -516,12 +517,12 @@ namespace TwitchLib
         /// <param name="direction">Creation date sorting direction.</param>
         /// <returns>A list of TwitchFollower objects.</returns>
         public static async Task<FollowersResponse> GetTwitchFollowers(string channel, int limit = 25,
-            int cursor = -1, SortDirection direction = SortDirection.Descending)
+            string cursor = -1, SortDirection direction = SortDirection.Descending)
         {
             string args = "";
 
             args += "?limit=" + limit;
-            args += cursor != -1 ? $"&cursor={cursor}" : "";
+            args += cursor != "-1" ? $"&cursor={cursor}" : "";
             args += "&direction=" + (direction == SortDirection.Descending ? "desc" : "asc");
 
             var resp = await MakeGetRequest($"https://api.twitch.tv/kraken/channels/{channel}/follows{args}");
